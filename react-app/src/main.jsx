@@ -1,10 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import { createStore } from 'redux';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const reducer = (state = 0, action) => {
+  if (action.type === 'INCREMENT') {
+    return state + 1;
+  } else if (action.type === 'DECREMENT') {
+    return state - 1;
+  }
+
+  return state;
+};
+
+const store = createStore(reducer);
+
+store.subscribe(() => {
+  console.log('current state', store.getState());
+});
+
+store.dispatch({
+  type: 'INCREMENT'
+});
+
+store.dispatch({
+  type: 'INCREMENT'
+});
+
+store.dispatch({
+  type: 'DECREMENT'
+});
